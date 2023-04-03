@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
     <data>
         <import type="android.view.View"/>
         <variable
             name="card"
             type="es.uam.eps.dadm.cards.Card" />
+        <variable
+            name="viewModel"
+            type="es.uam.eps.dadm.cards.StudyViewModel" />
     </data>
 
     <RelativeLayout
@@ -15,11 +19,19 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/info_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/info_text_view_message"
+            android:textSize="20sp"
+            tools:text="@string/info_text_view_message" />
+
+        <TextView
             android:id="@+id/question_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@{card.question}"
+            android:text="@{viewModel.card.question}"
             android:textSize="20sp"
             tools:text="@{card.question}" />
 
@@ -29,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@{card.answer}"
-            android:visibility="@{card.answered ? View.VISIBLE : View.INVISIBLE}"
+            android:text="@{viewModel.card.answer}"
+            android:visibility="@{viewModel.card.answered ? View.VISIBLE : View.INVISIBLE}"
             android:textSize="20sp"
             tools:text="@{card.answer}" />
 
@@ -63,24 +75,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/holo_green_light"
-                android:onClick="@{() -> card.update_card(5)}"
-                android:visibility="@{card.answered ? View.VISIBLE : View.INVISIBLE}"
+                android:onClick="@{() -> viewModel.card.update_card(5)}"
+                android:visibility="@{viewModel.card.answered ? View.VISIBLE : View.INVISIBLE}"
                 android:text="@string/easy_button_title" />
             <Button
                 android:id="@+id/doubt_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/holo_blue_light"
-                android:onClick="@{() -> card.update_card(3)}"
-                android:visibility="@{card.answered ? View.VISIBLE : View.INVISIBLE}"
+                android:onClick="@{() -> viewModel.card.update_card(3)}"
+                android:visibility="@{viewModel.card.answered ? View.VISIBLE : View.INVISIBLE}"
                 android:text="@string/doubt_button_title" />
             <Button
                 android:id="@+id/diff_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/holo_red_light"
-                android:onClick="@{() -> card.update_card(0)}"
-                android:visibility="@{card.answered ? View.VISIBLE : View.INVISIBLE}"
+                android:onClick="@{() -> viewModel.card.update_card(0)}"
+                android:visibility="@{viewModel.card.answered ? View.VISIBLE : View.INVISIBLE}"
                 android:text="@string/difficult_button_title" />
 
         </LinearLayout>

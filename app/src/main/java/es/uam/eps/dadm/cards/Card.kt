@@ -1,5 +1,10 @@
 package es.uam.eps.dadm.cards
 
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
+import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -95,6 +100,8 @@ open class Card(var id: String = UUID.randomUUID().toString(), var date: String 
         this.quality = quality
         update(LocalDateTime.now())
     }
+
+    fun is_due(date: LocalDateTime) = date.format(formatter) >= next_practice
 
 
     fun details(){

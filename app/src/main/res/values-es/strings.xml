@@ -8,4 +8,7 @@
     <string name="easy_button_title">Facil</string>
     <string name="doubt_button_title">Dudo</string>
     <string name="difficult_button_title">Dificil</string>
+    <string name="info_text_view_message">Numbero de cartas que quedan</string>
+    <string name="due_cards_format">%d Tarjetas quedan</string>
+    <string name="subtitle_text">Presiona para estudiar</string>
 </resources>

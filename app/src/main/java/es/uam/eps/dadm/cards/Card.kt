@@ -20,7 +20,7 @@ open class Card(var id: String = UUID.randomUUID().toString(), var date: String 
     var easiness : Double = 2.5
     var repetitions : Int = 0
     var interval : Long = 1L
-    var next_practice : String = date
+    var next_practice : String = LocalDateTime.now().format(formatter).toString()
 
     //statistics
     var average_easiness : Double = 0.0
@@ -103,6 +103,10 @@ open class Card(var id: String = UUID.randomUUID().toString(), var date: String 
 
     fun is_due(date: LocalDateTime) = date.format(formatter) >= next_practice
 
+    fun test(date : LocalDateTime){
+        Timber.i(date.format(formatter))
+        Timber.i("next practice ${next_practice.format(formatter)}")
+    }
 
     fun details(){
         println("eas = ${"%.2f".format(easiness)} rep = $repetitions int = $interval next = $next_practice")

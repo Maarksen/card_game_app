@@ -18,6 +18,17 @@ class CardsApplication: Application() {
     }
 
     companion object {
+        var date: LocalDateTime = LocalDateTime.now()
         var cards: MutableList<Card> = mutableListOf<Card>()
+
+        fun numberOfDueCards(): Int {
+            var num = 1
+            cards.forEach{
+                if(it.is_due(date)){
+                    num++
+                }
+            }
+            return num
+        }
     }
 }

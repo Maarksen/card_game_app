@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="es.uam.eps.dadm.cards.StudyViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/list_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/list_text"
+            android:textSize="20sp"
+            tools:text="@string/list_text"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/list_of_cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_text_view"
+            android:text="@{viewModel.card.question}"
+            android:textSize="20sp"
+            tools:text="@{viewModel.card.question}"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/review_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:text="@string/review_button"
+            tools:ignore="MissingConstraints" />
+    </RelativeLayout>
+
+</layout>

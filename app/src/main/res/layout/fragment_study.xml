@@ -2,7 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <data>
         <import type="android.view.View"/>
@@ -57,12 +57,12 @@
 
         <Button
             android:id="@+id/answer_button"
-            android:layout_below="@id/answer_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.card.answered ? View.INVISIBLE : View.VISIBLE}"
+            android:layout_below="@id/answer_text_view"
             android:layout_centerInParent="true"
-            android:text="@string/answer_button_text" />
+            android:text="@string/answer_button_text"
+            android:visibility="@{viewModel.card.answered ? View.INVISIBLE : View.VISIBLE}" />
 
         <LinearLayout
             android:layout_width="match_parent"

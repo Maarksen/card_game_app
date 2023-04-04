@@ -11,4 +11,6 @@
     <string name="info_text_view_message">Numbero de cartas que quedan</string>
     <string name="due_cards_format">%d Tarjetas quedan</string>
     <string name="subtitle_text">Presiona para estudiar</string>
+    <string name="list_text">Lista de cartas</string>
+    <string name="review_button">Review tarjetas</string>
 </resources>

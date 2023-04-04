@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="es.uam.eps.dadm.cards.TitleFragment"
+        android:label="TitleFragment"
+        tools:layout="@layout/fragment_title">
+        <action
+            android:id="@+id/action_titleFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studyFragment"
+        android:name="es.uam.eps.dadm.cards.StudyFragment"
+        android:label="StudyFragment"
+        tools:layout="@layout/fragment_study"/>
+    <fragment
+        android:id="@+id/cardListFragment"
+        android:name="es.uam.eps.dadm.cards.CardListFragment"
+        android:label="CardListFragment" >
+        <action
+            android:id="@+id/action_cardListFragment_to_studyFragment"
+            app:destination="@id/studyFragment" />
+    </fragment>
+</navigation>

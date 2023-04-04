@@ -13,15 +13,6 @@ class TitleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_title)
-
-        val fragment = TitleFragment()
-
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, fragment)
-            .replace(R.id.fragment_container, fragment)
-            .commit()
     }
 }

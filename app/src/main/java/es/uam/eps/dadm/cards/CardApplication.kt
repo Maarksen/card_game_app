@@ -25,7 +25,7 @@ class CardsApplication: Application() {
         var cards: MutableList<Card> = mutableListOf<Card>()
 
         fun numberOfDueCards(): Int {
-            var num = 1
+            var num = 0
             cards.forEach{
                 if(it.is_due(date)){
                     num++

@@ -33,11 +33,7 @@ class CardListFragment: Fragment() {
                 view.findNavController()
                     .navigate(R.id.action_cardListFragment_to_studyFragment)
             else
-                Toast.makeText(
-                    requireActivity(),
-                    R.string.no_more_cards_toast_message,
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(requireActivity(), R.string.no_more_cards_toast_message, Toast.LENGTH_LONG).show()
         }
 
         return binding.root

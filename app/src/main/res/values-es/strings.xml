@@ -13,4 +13,5 @@
     <string name="subtitle_text">Presiona para estudiar</string>
     <string name="list_text">Lista de cartas</string>
     <string name="review_button">Review tarjetas</string>
+    <string name="no_more_cards_toast_message">No hay mas tarjetas</string>
 </resources>

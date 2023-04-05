@@ -12,6 +12,5 @@
     <string name="subtitle_text">Tap to study</string>
     <string name="list_text">List of Cards</string>
     <string name="review_button">Review cards</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_more_cards_toast_message">No more cards</string>
 </resources>

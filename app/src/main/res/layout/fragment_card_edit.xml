@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="es.uam.eps.dadm.cards.StudyViewModel" />
+        <variable
+            name = "card"
+            type = "es.uam.eps.dadm.cards.Card"/>
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/curr_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{viewModel.card.date}"
+            android:textSize="20sp"
+            tools:text="@{viewModel.card.date}"/>
+
+        <TextView
+            android:id="@+id/text_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/curr_date"
+            android:text="@string/text_question"
+            android:textStyle="bold"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            tools:text="@string/text_question"/>
+
+        <EditText
+            android:id="@+id/edit_text_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_question"
+            android:hint="@string/edit_text_question"
+            android:text="@{card.question}"
+            tools:text="@{card.question}"/>
+
+        <TextView
+            android:id="@+id/text_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_text_question"
+            android:text="@string/text_answer"
+            android:textStyle="bold"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            tools:text="@string/text_answer"/>
+
+        <EditText
+            android:id="@+id/edit_text_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_answer"
+            android:hint="@string/edit_text_answer"
+            android:text="@{card.answer}"
+            tools:text="@{card.answer}"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_text_answer"
+            android:gravity="center">
+        <Button
+            android:id="@+id/accept_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/accept_card_edit_button_title"
+            android:textColor="@color/purple_500"
+            android:background="@android:color/transparent" />
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_card_edit_button_title"
+            android:textColor="@color/purple_500"
+            android:background="@android:color/transparent" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

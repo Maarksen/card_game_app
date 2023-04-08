@@ -10,9 +10,6 @@ class CardsApplication: Application() {
         cards.add(Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(), "To speak", "Hablar"))
         cards.add(Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(), "To sleep", "Dormir"))
         cards.add(Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(), "To wake up", "Despertarse"))
-        for (i in 1..100){
-            cards.add(Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(), "test ${i}", "el testo"))
-        }
     }
 
     override fun onCreate() {
@@ -32,6 +29,9 @@ class CardsApplication: Application() {
                 }
             }
             return num
+        }
+        fun getCard(cardId : String): Card?{
+            return cards.find { it.id == cardId}
         }
     }
 }

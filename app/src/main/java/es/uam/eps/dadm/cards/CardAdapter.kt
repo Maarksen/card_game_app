@@ -1,41 +1,39 @@
 package es.uam.eps.dadm.cards
 
+import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import timber.log.Timber
+import es.uam.eps.dadm.cards.databinding.ListItemCardBinding
+
 
 class CardAdapter() : RecyclerView.Adapter<CardAdapter.CardHolder>() {
     private var holderCounter = 0
     var data = listOf<Card>()
+    lateinit var binding : ListItemCardBinding
 
     inner class CardHolder(view: View) : RecyclerView.ViewHolder(view) {
-        init {
-            holderCounter++
-            Timber.i("CardHolder number $holderCounter created")
-        }
-        val questionTextView: TextView = itemView.findViewById(R.id.list_item_question)
-        val answerTextView:TextView = itemView.findViewById(R.id.list_item_answer)
-        val dateTextView: TextView = itemView.findViewById(R.id.list_item_date)
-
+        private var local = binding
         fun bind(card: Card) {
-            questionTextView.text = card.question
-            answerTextView.text = card.answer
-            dateTextView.text = card.date.substring(0,10)
-
-            itemView.setOnClickListener{
-                Toast.makeText(it.context, card.question, Toast.LENGTH_LONG).show()
+            local.card = card
+            itemView.setOnClickListener {
+                it.findNavController()
+                    .navigate(CardListFragmentDirections.actionCardListFragmentToCardEditFragment(card.id))
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_card, parent, false)
-        return CardHolder(view)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CardHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        binding = ListItemCardBinding.inflate(layoutInflater, parent, false)
+        return CardHolder(binding.root)
     }
 
     override fun getItemCount() = data.size

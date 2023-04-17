@@ -9,14 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import es.uam.eps.dadm.cards.databinding.FragmentCardEditBinding
+import es.uam.eps.dadm.cards.databinding.FragmentDeckEditBinding
 
-class CardEditFragment : Fragment() {
-    val cards = CardsApplication.cards
-    lateinit var card: Card
-    lateinit var binding: FragmentCardEditBinding
-    lateinit var question: String
-    lateinit var answer: String
+class DeckEditFragment : Fragment() {
+    val decks = CardsApplication.decks
+    lateinit var deck: Deck
+    lateinit var binding: FragmentDeckEditBinding
+    lateinit var name: String
+    lateinit var id: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,16 +24,16 @@ class CardEditFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_card_edit,
+            R.layout.fragment_deck_edit,
             container,
             false
         )
 
-        val args = CardEditFragmentArgs.fromBundle(requireArguments())
-        card = CardsApplication.getCard(args.cardId) ?: throw Exception("Wrong id")
-        binding.card = card
-        question = card.question
-        answer = card.answer
+        val args = DeckEditFragmentArgs.fromBundle(requireArguments())
+        deck = CardsApplication.getDeck(args.deckId) ?: throw Exception("Wrong id")
+        binding.deck = deck
+        name = deck.name
+        id = deck.id
 
         return binding.root
     }
@@ -47,7 +47,7 @@ class CardEditFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                question = s.toString()
+                name = s.toString()
             }
         }
 
@@ -57,7 +57,7 @@ class CardEditFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                answer = s.toString()
+                id = s.toString()
             }
         }
 
@@ -65,20 +65,20 @@ class CardEditFragment : Fragment() {
         binding.editTextQuestion.addTextChangedListener(questionTextWatcher)
 
         binding.acceptButton.setOnClickListener {
-            card.question = question
-            card.answer = answer
+            deck.name = name
+            deck.id = id
             it.findNavController()
-                .navigate(CardEditFragmentDirections.actionCardEditFragmentToCardListFragment(card.deck_id))
+                .navigate(DeckEditFragmentDirections.actionDeckEditFragmentToDecksFragment())
         }
         binding.cancelButton.setOnClickListener {
             it.findNavController()
-                .navigate(CardEditFragmentDirections.actionCardEditFragmentToCardListFragment(card.deck_id))
+                .navigate(DeckEditFragmentDirections.actionDeckEditFragmentToDecksFragment())
         }
 
         binding.deleteButton.setOnClickListener {
-            cards.remove(card)
+            decks.remove(deck)
             it.findNavController()
-                .navigate(CardEditFragmentDirections.actionCardEditFragmentToCardListFragment(card.deck_id))
+                .navigate(DeckEditFragmentDirections.actionDeckEditFragmentToDecksFragment())
         }
     }
 }

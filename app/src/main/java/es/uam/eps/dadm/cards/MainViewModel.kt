@@ -2,9 +2,7 @@ package es.uam.eps.dadm.cards
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import timber.log.Timber
 import java.time.LocalDateTime
-import java.util.*
 
 class StudyViewModel: ViewModel() {
     var card: Card? = null

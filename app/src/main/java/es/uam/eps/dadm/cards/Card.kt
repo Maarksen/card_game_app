@@ -1,9 +1,5 @@
 package es.uam.eps.dadm.cards
 
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
 import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -31,6 +27,7 @@ open class Card(var id: String = UUID.randomUUID().toString(), var date: String 
 
     //actual app
     var answered : Boolean = false
+    var deck_id : String = ""
 
     open fun show_card(date: LocalDateTime){
         println("${question.trim()} [ENTER]")
@@ -44,22 +41,6 @@ open class Card(var id: String = UUID.randomUUID().toString(), var date: String 
 
         update(date)
         details()
-    }
-
-    open fun simulate(num_days : Long){
-        println("Simulation of the card $question")
-        val now = LocalDateTime.now()
-        show_card(now)
-        var jump = interval
-        for(day in 1 .. num_days){
-            val time = now.plusDays(day).format(formatter)
-            if(day == jump){
-                show_card(now.plusDays(day))
-                jump += interval
-            }
-            else
-                println("Date: $time")
-        }
     }
 
     private fun easiness() : Double{
@@ -101,12 +82,11 @@ open class Card(var id: String = UUID.randomUUID().toString(), var date: String 
         update(LocalDateTime.now())
     }
 
-    fun is_due(date: LocalDateTime) = date.format(formatter) >= next_practice
-
-    fun test(date : LocalDateTime){
-        Timber.i(date.format(formatter))
-        Timber.i("next practice ${next_practice.format(formatter)}")
+    fun update_deck_id(id : String){
+        this.deck_id = id
     }
+
+    fun is_due(date: LocalDateTime) = date.format(formatter) >= next_practice
 
     fun details(){
         println("eas = ${"%.2f".format(easiness)} rep = $repetitions int = $interval next = $next_practice")

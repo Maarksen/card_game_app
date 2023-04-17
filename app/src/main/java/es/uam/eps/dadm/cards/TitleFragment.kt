@@ -1,7 +1,5 @@
 package es.uam.eps.dadm.cards
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +27,7 @@ class TitleFragment: Fragment() {
         binding.cardsTitleTextView.setOnClickListener { view ->
             if (CardsApplication.numberOfDueCards() > 0)
                 view.findNavController()
-                    .navigate(R.id.action_titleFragment_to_cardListFragment)
+                    .navigate(R.id.action_titleFragment_to_decksFragment)
             else
                 Toast.makeText(
                     requireActivity(),

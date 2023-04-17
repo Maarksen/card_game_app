@@ -1,7 +1,5 @@
 package es.uam.eps.dadm.cards
 
-import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import es.uam.eps.dadm.cards.databinding.ListItemCardBinding
 
 
 class CardAdapter() : RecyclerView.Adapter<CardAdapter.CardHolder>() {
-    private var holderCounter = 0
     var data = listOf<Card>()
     lateinit var binding : ListItemCardBinding
 
@@ -23,6 +20,14 @@ class CardAdapter() : RecyclerView.Adapter<CardAdapter.CardHolder>() {
             itemView.setOnClickListener {
                 it.findNavController()
                     .navigate(CardListFragmentDirections.actionCardListFragmentToCardEditFragment(card.id))
+            }
+
+            binding.showMoreButton.setOnClickListener {
+                Toast.makeText(
+                    it.context,
+                    "easiness: ${String.format("%.2f", card.easiness)}\nrepetitions: ${card.repetitions}\ninterval: ${card.interval}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }

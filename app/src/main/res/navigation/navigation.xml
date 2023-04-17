@@ -11,14 +11,18 @@
         android:label="TitleFragment"
         tools:layout="@layout/fragment_title">
         <action
-            android:id="@+id/action_titleFragment_to_cardListFragment"
-            app:destination="@id/cardListFragment" />
+            android:id="@+id/action_titleFragment_to_decksFragment"
+            app:destination="@id/decksFragment" />
     </fragment>
     <fragment
         android:id="@+id/studyFragment"
         android:name="es.uam.eps.dadm.cards.StudyFragment"
         android:label="StudyFragment"
-        tools:layout="@layout/fragment_study"/>
+        tools:layout="@layout/fragment_study">
+        <action
+            android:id="@+id/action_studyFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cardListFragment"
         android:name="es.uam.eps.dadm.cards.CardListFragment"
@@ -29,7 +33,10 @@
             app:destination="@id/studyFragment" />
         <action
             android:id="@+id/action_cardListFragment_to_cardEditFragment"
-            app:destination="@id/cardEditFragment" />
+            app:destination="@id/cardEditFragment"/>
+        <argument
+            android:name="deckId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/cardEditFragment"
@@ -44,5 +51,53 @@
         <argument
             android:name="cardId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="es.uam.eps.dadm.cards.StatisticsFragment"
+        android:label="StatisticsFragment"
+        tools:layout="@layout/fragment_statistics">
+        <action
+            android:id="@+id/action_statisticsFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment"
+            app:popUpTo="@id/cardListFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="es.uam.eps.dadm.cards.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about">
+        <action
+            android:id="@+id/action_aboutFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment"
+            app:popUpTo="@id/cardListFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/decksFragment"
+        android:name="es.uam.eps.dadm.cards.DecksFragment"
+        android:label="DecksFragment"
+        tools:layout="@layout/fragment_decks">
+        <action
+            android:id="@+id/action_decksFragment_to_cardListFragment"
+            app:destination="@id/cardListFragment" />
+        <action
+            android:id="@+id/action_decksFragment_to_deckEditFragment"
+            app:destination="@id/deckEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deckEditFragment"
+        android:name="es.uam.eps.dadm.cards.DeckEditFragment"
+        android:label="DeckEditFragment"
+        tools:layout="@layout/fragment_deck_edit">
+        <argument
+            android:name="deckId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_deckEditFragment_to_decksFragment"
+            app:destination="@id/decksFragment"
+            app:popUpTo="@id/decksFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
 </navigation>

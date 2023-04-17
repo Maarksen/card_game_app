@@ -2,9 +2,6 @@
 
     <data>
         <variable
-            name="card"
-            type="es.uam.eps.dadm.cards.Card" />
-        <variable
             name="deck"
             type="es.uam.eps.dadm.cards.Deck" />
     </data>
@@ -25,7 +22,7 @@
             android:textColor="@color/purple_500"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:text="@{card.question}"
+            android:text="@{deck.name}"
             android:textAppearance="?attr/textAppearanceHeadline6"/>
 
         <TextView
@@ -35,17 +32,17 @@
             android:layout_below="@id/list_item_question"
             android:textColor="@color/purple_500"
             android:textSize="16sp"
-            android:text="@{card.answer}"
+            android:text="@{deck.id}"
             android:textAppearance="?attr/textAppearanceBody2"/>
 
         <Button
-            android:id="@+id/show_more_button"
+            android:id="@+id/edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentEnd="true"
             android:textSize="11sp"
-            android:text="show more"/>
+            android:text="edit"/>
 
         <TextView
             android:id="@+id/list_item_date"
@@ -53,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:text="@{card.next_practice}"
+            android:text="19 cards"
             android:textAppearance="?attr/textAppearanceBody2"/>
 
     </RelativeLayout>

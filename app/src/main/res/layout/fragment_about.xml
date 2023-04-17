@@ -1,0 +1,88 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/my_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Marek Buch"
+            android:textSize="50sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/my_name"
+            android:layout_centerInParent="true"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:text="@string/author_text"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/about_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/author"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:layout_marginVertical="15sp"
+            android:text="@string/about_nav_menu_title"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/about_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_title"
+            android:layout_marginHorizontal="20sp"
+            android:textSize="17sp"
+            android:text="@string/about_about" />
+
+        <TextView
+            android:id="@+id/desc_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_text"
+            android:layout_marginVertical="15sp"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:text="@string/desc_text"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/desc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/desc_title"
+            android:layout_marginHorizontal="20sp"
+            android:text="@string/actual_description_text"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:id="@+id/version_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/desc_text"
+            android:layout_marginVertical="15sp"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:text="@string/version_text"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/version_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/version_title"
+            android:layout_marginHorizontal="20sp"
+            android:textSize="17sp"
+            android:text="@string/version_text_text"/>
+
+
+    </RelativeLayout>
+
+</layout>

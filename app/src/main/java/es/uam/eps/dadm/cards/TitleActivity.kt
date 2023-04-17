@@ -1,11 +1,10 @@
 package es.uam.eps.dadm.cards
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
-import es.uam.eps.dadm.cards.databinding.ActivityStudyBinding
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import es.uam.eps.dadm.cards.databinding.ActivityTitleBinding
 
 class TitleActivity : AppCompatActivity() {
@@ -14,5 +13,8 @@ class TitleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_title)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        binding.navView.setupWithNavController(navHostFragment.navController)
     }
 }

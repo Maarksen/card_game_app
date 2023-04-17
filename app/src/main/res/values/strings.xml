@@ -19,4 +19,25 @@
     <string name="edit_text_answer">Write the answer text</string>
     <string name="accept_card_edit_button_title">Accept</string>
     <string name="cancel_card_edit_button_title">Cancel</string>
+    <string name="new_card_fab_description">New card</string>
+    <string name="new_deck_fab_description">New deck</string>
+    <string name="added_card">Card added</string>
+    <string name="decks_nav_menu_title">Decks</string>
+    <string name="study_nav_menu_title">Review Cards</string>
+    <string name="statistics_nav_menu_title">Statistics</string>
+    <string name="about_nav_menu_title">About</string>
+    <string name="delete_button">Delete</string>
+    <string name="deck_name">Name</string>
+    <string name="deck_id">Deck identification</string>
+    <string name="edit_text_name">Write the name of the deck</string>
+    <string name="edit_text_id">Write the id of the deck</string>
+    <string name="stats_nav_menu_title">Statistics</string>
+    <string name="about_about">My name is Marek Buch, im 21 years old. I am a student at Brno University of Technology but right now I\'m studying at Univesidad Autonoma de Madrid.</string>
+    <string name="author_text">Author</string>
+    <string name="desc_text">Description</string>
+    <string name="version_text">Version</string>
+    <string name="version_text_text">Version 1.0</string>
+    <string name="actual_description_text">This application is a school project. The functionality is based on ANKI application.</string>
+    <string name="generate_button">Generate test</string>
+
 </resources>

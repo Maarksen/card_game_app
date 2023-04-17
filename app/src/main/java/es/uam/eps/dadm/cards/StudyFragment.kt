@@ -5,23 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import es.uam.eps.dadm.cards.databinding.ActivityStudyBinding
+import androidx.navigation.findNavController
 import es.uam.eps.dadm.cards.databinding.FragmentStudyBinding
 import timber.log.Timber
-import java.time.LocalDateTime
 
-private const val ANSWERED_KEY = "es.uam.eps.dadm.cards:answered"
 class StudyFragment : Fragment() {
 
-        private var date: LocalDateTime = LocalDateTime.now()
         lateinit var binding : FragmentStudyBinding
         private val viewModel: StudyViewModel by lazy {
             ViewModelProvider(this).get(StudyViewModel::class.java)
         }
+        //val arg = CardListFragmentArgs.fromBundle(requireArguments())
 
         private var listener = View.OnClickListener { v ->
             val quality: Int = when (v?.id) {
@@ -30,12 +27,18 @@ class StudyFragment : Fragment() {
                 binding.diffButton.id -> 0
                 else -> -1
             }
-
+            lateinit var deck_id : String
+            if(viewModel.card != null)
+                deck_id = viewModel.run {
+                    card?.deck_id!!
+                }
             binding.viewModel?.update(quality)
 
-            if (viewModel.card == null)
+            if (viewModel.card == null) {
                 Toast.makeText(activity, "No more cards to review", Toast.LENGTH_SHORT).show()
-
+                view?.findNavController()
+                    ?.navigate(StudyFragmentDirections.actionStudyFragmentToCardListFragment(deck_id))
+            }
             binding.invalidateAll()
         }
 

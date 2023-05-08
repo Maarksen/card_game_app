@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -14,7 +15,9 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.android.material.snackbar.Snackbar
 import es.uam.eps.dadm.cards.databinding.FragmentStatisticsBinding
+import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -22,6 +25,9 @@ import java.util.*
 class StatisticsFragment : Fragment() {
     val now = LocalDateTime.now()
     private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+    private val viewModel: StatisticsViewModel by lazy {
+        ViewModelProvider(this).get(StatisticsViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +40,20 @@ class StatisticsFragment : Fragment() {
             container,
             false
         )
+
+        viewModel.decks.observe(viewLifecycleOwner) {
+            var message = String()
+            it.forEach { message += "The deck named ${it.deck.name} has ${it.cards.size} cards\n" }
+            Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+        }
+
+        viewModel.loadDeckId(2)
+
+        viewModel.deckWithCards.observe(viewLifecycleOwner) {
+            val deck = it[0].deck
+            val cards = it[0].cards
+            Timber.i("The deck named " + deck.name + " has " + cards.size + " cards\n")
+        }
 
         binding.barChart.invalidate()
 

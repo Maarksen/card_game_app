@@ -77,7 +77,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_answer"
-                android:text="@{deck.id}"
+                android:text="@{deck.deck_id}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

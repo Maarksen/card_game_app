@@ -1,5 +1,9 @@
 package es.uam.eps.dadm.cards
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -7,9 +11,11 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.roundToLong
 
-open class Card(var id: String = UUID.randomUUID().toString(), var date: String = LocalDateTime.now().toString(),
-                open var question: String, open var answer: String){
+@Entity(tableName = "cards_table")
+open class Card(@PrimaryKey var id: String = UUID.randomUUID().toString(), var date: String = LocalDateTime.now().toString(),
+                @ColumnInfo(name = "card_question") open var question: String, open var answer: String, var deck_id : String = "0"){
 
+    @Ignore
     private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 
     var quality : Int = 0
@@ -27,7 +33,6 @@ open class Card(var id: String = UUID.randomUUID().toString(), var date: String 
 
     //actual app
     var answered : Boolean = false
-    var deck_id : String = ""
 
     open fun show_card(date: LocalDateTime){
         println("${question.trim()} [ENTER]")

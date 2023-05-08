@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import es.uam.eps.dadm.cards.databinding.FragmentStudyBinding
@@ -49,9 +51,15 @@ class StudyFragment : Fragment() {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_study, container, false)
             binding.card = viewModel.card
             binding.viewModel = viewModel
+            binding.lifecycleOwner = viewLifecycleOwner
             binding.answerButton.setOnClickListener {
                 Timber.i("${viewModel.card}")
                 viewModel.card?.answered = true
+                binding.invalidateAll()
+            }
+
+            viewModel.dueCard.observe(viewLifecycleOwner) {
+                viewModel.card = it
                 binding.invalidateAll()
             }
 
@@ -67,6 +75,12 @@ class StudyFragment : Fragment() {
 
         override fun onStart() {
             super.onStart()
+            if(viewModel.get_board_settings()){
+                binding.boardView?.isGone = false
+            }
+            else{
+                binding.boardView?.isGone = true
+            }
             Timber.i("onStart called")
         }
 

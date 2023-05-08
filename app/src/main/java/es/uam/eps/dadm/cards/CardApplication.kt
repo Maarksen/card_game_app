@@ -1,11 +1,14 @@
 package es.uam.eps.dadm.cards
 
 import android.app.Application
+import es.uam.eps.dadm.cards.database.CardDatabase
 import timber.log.Timber
 import java.time.LocalDateTime
 import java.util.*
+import java.util.concurrent.Executors
 
 class CardsApplication: Application() {
+    private val executor = Executors.newSingleThreadExecutor()
     init {
         cards.add(Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(), "To speak", "Hablar"))
         cards.add(Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(), "To sleep", "Dormir"))
@@ -21,6 +24,26 @@ class CardsApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        val cardDatabase = CardDatabase.getInstance(applicationContext)
+        executor.execute {
+            cardDatabase.cardDao.addDeck(Deck("1", "English"))
+            cardDatabase.cardDao.addDeck(Deck("2", "Frech"))
+            cardDatabase.cardDao.addCard(
+                Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(),"To wake up", "Despertarse", deck_id = "1")
+            )
+            cardDatabase.cardDao.addCard(
+                Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(),"To rule out", "Descartar", deck_id = "1")
+            )
+            cardDatabase.cardDao.addCard(
+                Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(),"To turn down", "Rechazar",deck_id = "1")
+            )
+            cardDatabase.cardDao.addCard(
+                Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(),"La voiture", "El coche", deck_id = "2")
+            )
+            cardDatabase.cardDao.addCard(
+                Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(),"J'ai faim", "Tengo hambre", deck_id = "2")
+            )
+        }
         Timber.plant(Timber.DebugTree())
     }
 
@@ -43,7 +66,7 @@ class CardsApplication: Application() {
         }
 
         fun getDeck(deckId : String): Deck?{
-            return decks.find { it.id == deckId}
+            return decks.find { it.deck_id == deckId}
         }
 
         fun addCard(card : Card){

@@ -32,7 +32,7 @@
             android:layout_below="@id/list_item_question"
             android:textColor="@color/purple_500"
             android:textSize="16sp"
-            android:text="@{deck.id}"
+            android:text="@{deck.deck_id}"
             android:textAppearance="?attr/textAppearanceBody2"/>
 
         <Button

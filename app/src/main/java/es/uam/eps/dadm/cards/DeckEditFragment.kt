@@ -33,7 +33,7 @@ class DeckEditFragment : Fragment() {
         deck = CardsApplication.getDeck(args.deckId) ?: throw Exception("Wrong id")
         binding.deck = deck
         name = deck.name
-        id = deck.id
+        id = deck.deck_id
 
         return binding.root
     }
@@ -66,7 +66,7 @@ class DeckEditFragment : Fragment() {
 
         binding.acceptButton.setOnClickListener {
             deck.name = name
-            deck.id = id
+            deck.deck_id = id
             it.findNavController()
                 .navigate(DeckEditFragmentDirections.actionDeckEditFragmentToDecksFragment())
         }

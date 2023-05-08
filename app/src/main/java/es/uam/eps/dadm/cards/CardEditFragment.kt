@@ -8,18 +8,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import es.uam.eps.dadm.cards.database.CardDatabase
 import es.uam.eps.dadm.cards.databinding.FragmentCardEditBinding
+import java.util.concurrent.Executors
 
 class CardEditFragment : Fragment() {
+    private val executor = Executors.newSingleThreadExecutor()
+
     val cards = CardsApplication.cards
     lateinit var card: Card
     lateinit var binding: FragmentCardEditBinding
     lateinit var question: String
     lateinit var answer: String
 
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(CardEditViewModel::class.java)
+    }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(
@@ -30,10 +40,13 @@ class CardEditFragment : Fragment() {
         )
 
         val args = CardEditFragmentArgs.fromBundle(requireArguments())
-        card = CardsApplication.getCard(args.cardId) ?: throw Exception("Wrong id")
-        binding.card = card
-        question = card.question
-        answer = card.answer
+        viewModel.loadCardId(args.cardId)
+        viewModel.card.observe(viewLifecycleOwner) {
+            card = it
+            binding.card = card
+            question = card.question
+            answer = card.answer
+        }
 
         return binding.root
     }
@@ -67,6 +80,7 @@ class CardEditFragment : Fragment() {
         binding.acceptButton.setOnClickListener {
             card.question = question
             card.answer = answer
+            executor.execute { context?.let { it1 -> CardDatabase.getInstance(it1).cardDao.update(card) } }
             it.findNavController()
                 .navigate(CardEditFragmentDirections.actionCardEditFragmentToCardListFragment(card.deck_id))
         }

@@ -18,12 +18,12 @@ class DeckAdapter() : RecyclerView.Adapter<DeckAdapter.DeckHolder>() {
             local.deck = deck
             itemView.setOnClickListener {
                 it.findNavController()
-                    .navigate(DecksFragmentDirections.actionDecksFragmentToCardListFragment(deck.id))
+                    .navigate(DecksFragmentDirections.actionDecksFragmentToCardListFragment(deck.deck_id))
             }
 
             binding.editButton.setOnClickListener {
                 it.findNavController()
-                    .navigate(DecksFragmentDirections.actionDecksFragmentToDeckEditFragment(deck.id))
+                    .navigate(DecksFragmentDirections.actionDecksFragmentToDeckEditFragment(deck.deck_id))
             }
         }
     }

@@ -6,11 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import es.uam.eps.dadm.cards.databinding.FragmentDecksBinding
 
 class DecksFragment : Fragment() {
     private lateinit var adapter: DeckAdapter
+
+    private val decksViewModel by lazy {
+        ViewModelProvider(this).get(DecksViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +35,7 @@ class DecksFragment : Fragment() {
         binding.newDeckFab.setOnClickListener {
             val deck = Deck("", "")
             CardsApplication.addDeck(deck)
-            it.findNavController().navigate(DecksFragmentDirections.actionDecksFragmentToDeckEditFragment(deck.id))
+            it.findNavController().navigate(DecksFragmentDirections.actionDecksFragmentToDeckEditFragment(deck.deck_id))
         }
 
         return binding.root

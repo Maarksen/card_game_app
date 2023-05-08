@@ -40,5 +40,13 @@
     <string name="version_text_text">Version 1.0</string>
     <string name="actual_description_text">Esta aplicacion es un proyecto escolar. La funcionalidad esta basada en ANKI aplicacion.</string>
     <string name="generate_button">Generate test</string>
+    <string name="settings_menu_title">Settings</string>
+    <string name="logout_menu_title">Logout</string>
+    <string name="decks_header">Decks</string>
+    <string name="max_number_cards">Maximo numero de tarjetas</string>
+    <string name="board_summary_off">Board no posible</string>
+    <string name="board_summary_on">Board no posible</string>
+    <string name="board_title">Mostrar board</string>
+
 
 </resources>

@@ -1,14 +1,19 @@
 package es.uam.eps.dadm.cards
 
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import java.io.File
 import java.io.InputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class Deck(var id : String = UUID.randomUUID().toString(), var name : String){
+@Entity(tableName = "decks_table")
+class Deck(@PrimaryKey var deck_id : String, var name : String){
+    @Ignore
     private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-
+    @Ignore
     var cards = mutableListOf<Card>()
 
     fun add_card(){

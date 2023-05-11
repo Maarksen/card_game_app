@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.firebase.database.FirebaseDatabase
 import es.uam.eps.dadm.cards.database.CardDatabase
 import es.uam.eps.dadm.cards.databinding.FragmentCardListBinding
 import timber.log.Timber
@@ -20,13 +21,17 @@ class CardListFragment: Fragment() {
     private val executor = Executors.newSingleThreadExecutor()
 
     private val cardListViewModel by lazy {
-        ViewModelProvider(this).get(CardListViewModel::class.java)
+        ViewModelProvider(this).get(CardListFirebaseViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
+    private var reference = FirebaseDatabase
+        .getInstance()
+        .getReference("cards")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,14 +45,9 @@ class CardListFragment: Fragment() {
             container,
             false
         )
-
-
-        //deck = CardsApplication.getCard(args.deckId) ?: throw Exception("Wrong id")
-
         val arg = CardListFragmentArgs.fromBundle(requireArguments())
 
         adapter = CardAdapter()
-        //adapter.data = CardsApplication.cards.filter{it.deck_id == arg.deckId}
         adapter.data = emptyList()
         binding.cardListRecyclerView.adapter = adapter
 
@@ -55,7 +55,6 @@ class CardListFragment: Fragment() {
             if (CardsApplication.numberOfDueCards() > 0)
                 view.findNavController()
                     .navigate(CardListFragmentDirections.actionCardListFragmentToStudyFragment())
-                    //.navigate(R.id.action_cardListFragment_to_studyFragment)
             else
                 Toast.makeText(requireActivity(), R.string.no_more_cards_toast_message, Toast.LENGTH_LONG).show()
         }
@@ -64,8 +63,9 @@ class CardListFragment: Fragment() {
             val card = Card(UUID.randomUUID().toString(), LocalDateTime.now().toString(), "", "")
             card.update_deck_id(arg.deckId)
            //CardsApplication.addCard(card)
-            executor.execute { context?.let { it1 -> CardDatabase.getInstance(it1).cardDao.addCard(card) } }
+            //executor.execute { context?.let { it1 -> CardDatabase.getInstance(it1).cardDao.addCard(card) } }
             Timber.i("ano dostal som sa sem")
+            reference.child(card.id).setValue(card)
             it.findNavController().navigate(CardListFragmentDirections.actionCardListFragmentToCardEditFragment(card.id))
         }
 

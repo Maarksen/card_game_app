@@ -34,6 +34,14 @@ open class Card(@PrimaryKey var id: String = UUID.randomUUID().toString(), var d
     //actual app
     var answered : Boolean = false
 
+    constructor() : this(
+        "question",
+        "answer",
+        LocalDateTime.now().toString(),
+        UUID.randomUUID().toString(),
+        "0"
+    )
+
     open fun show_card(date: LocalDateTime){
         println("${question.trim()} [ENTER]")
         val input = readln()

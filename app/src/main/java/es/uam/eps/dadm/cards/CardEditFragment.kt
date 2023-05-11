@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.firebase.database.FirebaseDatabase
 import es.uam.eps.dadm.cards.database.CardDatabase
 import es.uam.eps.dadm.cards.databinding.FragmentCardEditBinding
 import java.util.concurrent.Executors
@@ -23,8 +24,12 @@ class CardEditFragment : Fragment() {
     lateinit var question: String
     lateinit var answer: String
 
+    private var reference = FirebaseDatabase
+        .getInstance()
+        .getReference("cards")
+
     private val viewModel by lazy {
-        ViewModelProvider(this).get(CardEditViewModel::class.java)
+        ViewModelProvider(this).get(CardEditFirebaseViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -40,9 +45,9 @@ class CardEditFragment : Fragment() {
         )
 
         val args = CardEditFragmentArgs.fromBundle(requireArguments())
-        viewModel.loadCardId(args.cardId)
-        viewModel.card.observe(viewLifecycleOwner) {
-            card = it
+        //viewModel.loadCardId(args.cardId)
+        viewModel.cards.observe(viewLifecycleOwner) {
+            card = it.find { it.id == args.cardId }!!
             binding.card = card
             question = card.question
             answer = card.answer
@@ -80,7 +85,8 @@ class CardEditFragment : Fragment() {
         binding.acceptButton.setOnClickListener {
             card.question = question
             card.answer = answer
-            executor.execute { context?.let { it1 -> CardDatabase.getInstance(it1).cardDao.update(card) } }
+            //executor.execute { context?.let { it1 -> CardDatabase.getInstance(it1).cardDao.update(card) } }
+            reference.child(card.id).setValue(card)
             it.findNavController()
                 .navigate(CardEditFragmentDirections.actionCardEditFragmentToCardListFragment(card.deck_id))
         }
